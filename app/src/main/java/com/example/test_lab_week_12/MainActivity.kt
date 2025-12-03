@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 }
             })[MovieViewModel::class.java]
 
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
