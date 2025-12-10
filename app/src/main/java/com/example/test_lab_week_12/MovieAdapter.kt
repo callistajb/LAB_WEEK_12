@@ -1,4 +1,4 @@
-package com.example.test_lab_week_12
+package com.example.lab_week_13
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.test_lab_week_12.model.Movie
+import com.example.lab_week_13.model.Movie
+import com.example.lab_week_13.R
 
 class MovieAdapter(private val clickListener: MovieClickListener) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -15,8 +16,8 @@ class MovieAdapter(private val clickListener: MovieClickListener) :
     private val movies = mutableListOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.view_movie_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.view_movie_item, parent, false)
         return MovieViewHolder(view)
     }
 
@@ -29,24 +30,22 @@ class MovieAdapter(private val clickListener: MovieClickListener) :
     }
 
     fun addMovies(movieList: List<Movie>) {
-        movies.addAll(movieList)
-        notifyItemRangeInserted(0, movieList.size)
+        this.movies.clear()
+        this.movies.addAll(movieList)
+        notifyDataSetChanged()
     }
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageUrl = "https://image.tmdb.org/t/p/w185/"
-        private val titleText: TextView by lazy {
-            itemView.findViewById(R.id.movie_title)
-        }
-        private val poster: ImageView by lazy {
-            itemView.findViewById(R.id.movie_poster)
-        }
+
+        private val titleText: TextView = itemView.findViewById(R.id.movie_title)
+        private val poster: ImageView = itemView.findViewById(R.id.movie_poster)
 
         fun bind(movie: Movie) {
             titleText.text = movie.title
 
             Glide.with(itemView.context)
-                .load("$imageUrl${movie.posterPath}")
+                .load(imageUrl + movie.posterPath)
                 .placeholder(R.mipmap.ic_launcher)
                 .fitCenter()
                 .into(poster)

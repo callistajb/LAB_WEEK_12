@@ -1,19 +1,19 @@
-package com.example.test_lab_week_12
+package com.example.lab_week_13
 
-import com.example.test_lab_week_12.api.MovieService
-import com.example.test_lab_week_12.model.Movie
+import com.example.lab_week_13.api.MovieService
+import com.example.lab_week_13.model.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class MovieRepository(private val movieService: MovieService) {
-    private val apiKey = "151d9add3f45fcda393b1bb9e47fdbe9"
+
+    private val apiKey = "2aec3bef9e2a1144b21f1e5aa2ce4357"
 
     fun fetchMovies(): Flow<List<Movie>> {
         return flow {
-            val response = movieService.getPopularMovies(apiKey)
-            emit(response.results)
+            emit(movieService.getPopularMovies(apiKey).results)
         }.flowOn(Dispatchers.IO)
     }
 }

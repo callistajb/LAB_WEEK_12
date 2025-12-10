@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".DetailsActivity">
+    tools:context="com.example.lab_week_13.DetailsActivity">
 
     <ImageView
         android:id="@+id/movie_poster"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_margin="16dp"
         android:contentDescription="@string/movie_poster"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,7 +21,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_margin="16dp"
         android:ellipsize="end"
         android:maxLines="4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/release_text"
         app:layout_constraintStart_toStartOf="@+id/movie_poster"
         app:layout_constraintTop_toBottomOf="@+id/movie_poster"
