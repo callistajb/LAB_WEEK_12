@@ -1,0 +1,24 @@
+ASSIGNMENT - WEEK 13 - IF570-AL
+Callista Jasmine Bandono (00000110963)
+
+1. Why is MVVM important? Which files represent Model, which files represent 
+View, and which files represent ViewModel? 
+MVVM (Model-View-ViewModel) penting karena pola arsitektur ini memisahkan antarmuka pengguna (UI) dari logika bisnis aplikasi. Pemisahan ini memungkinkan pengembang untuk mendesain ulang UI atau memperbarui logika bisnis secara independen tanpa mempengaruhi komponen lain, sehingga memudahkan penambahan fitur baru dan pengujian (testing) kode yang sudah ada. MVVM juga sangat berguna dalam pembuatan aplikasi besar yang menggunakan banyak data dan tampilan.
+Berdasarkan struktur proyek di modul ini:
+Model (Data Layer): Merepresentasikan lapisan data. File-file yang termasuk adalah Movie.kt (Entity), MovieDao.kt, MovieDatabase.kt, dan MovieRepository.kt.
+View (UI): Menampilkan data kepada pengguna. File-file yang termasuk adalah MainActivity.kt, activity_main.xml, dan RecyclerViewBinding.kt.
+ViewModel: Mengambil data dari Model dan menyediakannya untuk View. File yang termasuk adalah MovieViewModel.kt (diasumsikan dari konteks penggunaan di MainActivity.kt).
+
+2. In Part 1, you implemented Data Binding, why is this more efficient than using 
+the normal method? 
+Penggunaan Data Binding lebih efisien karena memungkinkan ViewModel untuk berkomunikasi langsung dengan View tanpa perlu menggunakan pemanggilan findViewById atau metode serupa secara manual. Dengan Data Binding, kita dapat memanggil atribut (seperti app:list) langsung di dalam elemen layout XML (seperti RecyclerView) dan mengisinya secara langsung dengan data (LiveData atau StateFlow) dari ViewModel, sehingga kode menjadi lebih ringkas dan terstruktur.
+
+3. In Part 2, you implemented the Singleton Pattern, why is this important? 
+Pola Singleton sangat penting untuk memastikan bahwa hanya ada satu instance (objek tunggal) dari Database yang dibuat di seluruh aplikasi, meskipun diakses oleh banyak thread. Hal ini krusial karena pembuatan instance database baru memakan banyak sumber daya (expensive). Selain itu, Singleton menjamin validitas data dan mencegah terjadinya Race Conditions (kondisi balapan data antar proses).
+
+4. In Part 2 & 3, you implemented the Repository Pattern, why is this important? 
+Pola Repository penting karena berfungsi untuk menyinkronkan data aplikasi antara layanan web (API) dan database lokal (Room). Pola ini memastikan bahwa data dalam database lokal selalu diperbarui sesuai dengan data di layanan web. Selain itu, pola ini memungkinkan pengguna untuk tetap mengakses aplikasi dan melihat data (melalui cache) meskipun perangkat tidak memiliki koneksi internet di area tersebut.
+
+5. In part 3, you implemented the Worker Manager, is there another way to refresh 
+your database with the latest data other than using Worker?
+Ya, terdapat cara lain. Salah satu cara yang umum (selain penjadwalan latar belakang) adalah dengan memanggil fungsi pengambilan data API (fetchMoviesFromNetwork) secara manual di dalam siklus hidup (lifecycle) Activity atau Fragment, misalnya pada metode onResume() atau onCreate(). Cara ini akan memperbarui data setiap kali pengguna membuka aplikasi. Namun, metode ini mengharuskan aplikasi dalam keadaan aktif/terbuka, berbeda dengan WorkManager yang dapat memperbarui data secara terjadwal di latar belakang bahkan ketika aplikasi sedang ditutup. Alternatif lain untuk penjadwalan (meski kurang disarankan dibanding WorkManager untuk kasus ini) adalah menggunakan AlarmManager atau JobScheduler.
